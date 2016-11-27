@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block wraptitle %}
+<div class="text-center">
+  <h1>Leboncoin Car Sorter</h1>
+</div> <!-- text-centered -->
+{% endblock wraptitle %}
+
+{% block extrajs %}
+<script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+{% endblock extrajs %}
+
+
+{% block content %}
+  {% from "_formhelpers_bootstrap.html" import render_field %}
+  <form action="{{ url_for('home') }}" method="post" class="form-inline" autocomplete="off">
+  <div class="row">
+  <div class="col-md-7">
+      {{ render_field(form.address) }}
+  </div> <!-- col-md -->
+  <div class="col-md-4">
+      {{ render_field(form.proxy) }}
+  </div> <!-- col-md -->
+  <div class="col-md-1">
+    <button type="submit" class="btn btn-default">OK</button>
+  </div> <!-- col-md-2 -->
+  </div> <!-- row -->
+  </form>
+
+  <hr>
+
+  <table class="table table-striped table-hover sortable">
+    <thead>
+        <tr>
+        <th><i class="fa fa-link"></i> Title</th>
+        <th>&euro;</th>
+        <th>KM</th>
+        <th>
+          <span data-toggle="tooltip" title="The lower the better">&euro;*KM</span>
+        </th>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Year</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for car in cars %}
+      <tr>
+        <td>
+          <a href="{{ car.link }}">{{ car.title }}</a>
+        </td>
+        <td>{{ car.price }}</td>
+        <td>{{ car.mileage }}</td>
+        <td>{{ car.price_km }}</td>
+        <td>{{ car.make }}</td>
+        <td>{{ car.model }}</td>
+        <td>{{ car.year }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock content %}
