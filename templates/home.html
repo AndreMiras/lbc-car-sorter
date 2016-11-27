@@ -49,9 +49,9 @@
         <td>
           <a href="{{ car.link }}">{{ car.title }}</a>
         </td>
-        <td>{{ car.price }}</td>
-        <td>{{ car.mileage }}</td>
-        <td>{{ car.price_km }}</td>
+        <td>{{ car.price|int if car.price }}</td>
+        <td>{{ car.mileage|int if car.mileage }}</td>
+        <td>{{ car.price_km|int if car.price_km }}</td>
         <td>{{ car.make }}</td>
         <td>{{ car.model }}</td>
         <td>{{ car.year }}</td>
